@@ -5,3 +5,4 @@ startRegBtn = InlineKeyboardMarkup().add(InlineKeyboardButton(text='Зареги
 roleTypeBtn = InlineKeyboardMarkup()
 roleTypeBtn.add(InlineKeyboardButton(text='Я участник группы', callback_data='member'))
 roleTypeBtn.add(InlineKeyboardButton(text='Я староста', callback_data='setHeadman'))
+
