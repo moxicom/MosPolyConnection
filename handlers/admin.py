@@ -22,7 +22,7 @@ class FSMAdmin(StatesGroup):
 # @dp.message_handler(commands=['добавить'], state=None)
 async def msg_start(message: types.Message):
     await FSMAdmin.title.set()
-    await message.reply("Введите заголовок")
+    await message.reply('Введите заголовок')
 
 
 # @dp.message_handler(content_types=['text'], state=FSMAdmin.title)
@@ -33,13 +33,13 @@ async def msg_set_title(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         data['title'] = message.text
     await FSMAdmin.next()
-    await message.reply("Теперь введите текст")
-    print("second message has been recived")
+    await message.reply('Теперь введите текст')
+    print('second message has been recived')
 
 
 # @dp.message_handler(state=FSMAdmin.text)
 async def msg_set_text(message: types.Message, state: FSMContext):
-    cur.executemany('INSERT INTO messages (title, message) VALUES(?, ?)', [(glob_title, message.text)])
+    cur.executemany("INSERT INTO messages (title, message) VALUES(?, ?)", [(glob_title, message.text)])
     con.commit()
     async with state.proxy() as data:
         data['text'] = message.text
@@ -47,7 +47,7 @@ async def msg_set_text(message: types.Message, state: FSMContext):
     async with state.proxy() as data:
         await message.reply(str(data))
     await state.finish()
-    print("third message has been recived")
+    print('third message has been recived')
 
 
 def register_handlers_admin(dp: Dispatcher):
